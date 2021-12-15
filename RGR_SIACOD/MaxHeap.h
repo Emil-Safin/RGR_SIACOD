@@ -17,9 +17,9 @@ void heapify(std::vector<int>& hT, int i)
     int largest = i;
     int l = 2 * i + 1;
     int r = 2 * i + 2;
-    if (l < size && hT[l] > hT[largest])
+    if (l < size  && hT[l] > hT[largest])
         largest = l;
-    if (r < size && hT[r] > hT[largest])
+    if (r < size  && hT[r] > hT[largest])
         largest = r;
 
     if (largest != i)
@@ -38,7 +38,7 @@ void insert(std::vector<int>& hT, int newNum)
     else
     {
         hT.push_back(newNum);
-        for (int i = size / 2 - 1; i >= 0; i--)
+        for (int i = size / 2 ; i >= 0; i--)
         {
             heapify(hT, i);
         }
@@ -53,13 +53,22 @@ void deleteNode(std::vector<int>& hT, int num)
         if (num == hT[i])
             break;
     }
-    swap(&hT[i], &hT[size - 1]);
-
+    swap(&hT[i], &hT[size-1]);
     hT.pop_back();
-    for (int i = size / 2 - 1; i >= 0; i--)
+    for (int i = size/ 2; i >= 0; i--)
     {
         heapify(hT, i);
     }
+}
+
+bool search(std::vector<int>& hT, int num){
+    int size = hT.size();
+    for (int i = 0; i < size; i++)
+    {
+        if (num == hT[i]) 
+            return 1;        
+    }
+    return 0;
 }
 //void printArray(std::vector<int>& hT)
 //{
